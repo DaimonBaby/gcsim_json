@@ -1,0 +1,46 @@
+while 1 {
+  switch {
+    case !.zhongli.tags.shielded: {
+      zhongli skill[hold = 1];
+    }
+    case .xingqiu.burst.ready && .yelan.burst.ready && .hutao.skill.cd < 500: {
+      xingqiu burst;
+      while .xingqiu.skill.ready {
+        xingqiu skill;
+      }
+      yelan burst,
+      attack;
+      while .yelan.skill.ready {
+        yelan skill,
+        attack;
+      }
+    }
+    case .hutao.skill.ready && .xingqiu.mods.xingqiuburst > 500 && .yelan.mods.yelanburst > 500: {
+      hutao skill;
+      while .hutao.mods.paramita > 0 {
+        if .hutao.mods.paramita < 100 && .hutao.burst.ready {
+          hutao attack,
+          burst;
+        } else {
+          hutao attack,
+          charge,
+          dash;
+        }
+      }
+    }
+    case .xingqiu.energy < 75 && .yelan.energy < 65 && .xingqiu.skill.ready: {
+      xingqiu skill;
+    }
+    case .xingqiu.energy < 80 && .yelan.energy < 70 && .yelan.skill.ready: {
+      yelan skill,
+      attack;
+    }
+    default: {
+      hutao attack;
+    }
+    print(.zhongli.tags.shielded);
+    print (.xingqiu.mods.xingqiuburst);
+    print (.hutao.mods.paramita);
+    print (.status.hutaoskill);
+  }
+}
