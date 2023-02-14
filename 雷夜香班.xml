@@ -1,22 +1,3 @@
-raiden char lvl=90/90 cons=2 talent=9,10,10;
-raiden add weapon="engulfinglightning" refine=1 lvl=90/90;
-raiden add set="emblemofseveredfate" count=4;
-raiden add stats hp=4989 atk=344 atk%=0.472 er=1.043 em=79 cr=0.673 cd=0.536 electro%=0.466;
-
-xiangling char lvl=90/90 cons=6 talent=9,9,9;
-xiangling add weapon="thecatch" refine=5 lvl=90/90;
-xiangling add set="emblemofseveredfate" count=4;
-xiangling add stats def%=0.168 def=62 hp=4780 atk=430 atk%=0.618 er=0.343 em=42 cr=0.599 cd=0.5900000000000001 pyro%=0.466;
-
-bennett char lvl=90/90 cons=5 talent=9,9,10;
-bennett add weapon="favoniussword" refine=5 lvl=90/90;
-bennett add set="noblesseoblige" count=4;
-bennett add stats def%=0.131 def=188 hp=5796 hp%=1.34 atk=375 atk%=0.099 er=0.045 em=131 cr=0.455 cd=0.194;
-
-yelan char lvl=90/90 cons=2 talent=6,9,9;
-yelan add weapon="aquasimulacra" refine=1 lvl=90/90;
-yelan add set="emblemofseveredfate" count=4;
-yelan add stats def%=0.102 hp=5049 hp%=0.7869999999999999 atk=348 atk%=0.053 er=0.537 em=39 cr=0.41600000000000004 cd=1.065 hydro%=0.466;
 
 options iteration=500 duration=90 swap_delay=12;
 
