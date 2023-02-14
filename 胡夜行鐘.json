@@ -1,3 +1,9 @@
+options iteration=1000 duration=90 swap_delay=12;
+
+target lvl=100 resist=0.1 particle_threshold=460000 particle_drop_count=3;
+
+active hutao;
+
 while 1 {
   switch {
     case !.zhongli.tags.shielded: {
@@ -17,16 +23,20 @@ while 1 {
     }
     case .hutao.skill.ready && .xingqiu.mods.xingqiuburst > 500 && .yelan.mods.yelanburst > 500: {
       hutao skill;
-      while .hutao.mods.paramita > 0 {
+      while .hutao.mods.paramita > 0 && .stam > 5 {
+      print ("stam",.stam);
+     print ("hutao skill",.hutao.mods.paramita);
         if .hutao.mods.paramita < 100 && .hutao.burst.ready {
-          hutao attack,
-          burst;
+          hutao attack,burst;
         } else {
           hutao attack,
           charge,
           dash;
         }
       }
+      print("shielded",.zhongli.tags.shielded);
+      print("xingqiuburst",.xingqiu.mods.xingqiuburst);
+      print("yelanburst",.yelan.mods.yelanburst);
     }
     case .xingqiu.energy < 75 && .yelan.energy < 65 && .xingqiu.skill.ready: {
       xingqiu skill;
@@ -38,9 +48,10 @@ while 1 {
     default: {
       hutao attack;
     }
-    print(.zhongli.tags.shielded);
-    print (.xingqiu.mods.xingqiuburst);
-    print (.hutao.mods.paramita);
-    print (.status.hutaoskill);
+    print("zhongli.tags.shielded",.zhongli.tags.shielded);
+    print ("xingqiu.mods.xingqiuburst",.xingqiu.mods.xingqiuburst);
+    print ("hutao.mods.paramita",.hutao.mods.paramita);
+    print ("status.hutaoskill",.status.hutaoskill);
   }
+  print ("stam",.stam);
 }
