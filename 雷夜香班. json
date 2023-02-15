@@ -1,4 +1,3 @@
-
 options iteration=500 duration=90 swap_delay=12;
 
 target lvl=100 resist=0.1 particle_threshold=460000 particle_drop_count=3;
@@ -8,47 +7,47 @@ active raiden;
 raiden skill;
 
 while 1 {
-  switch {
-    case .raiden.burst.ready && .yelan.mods.yelanburst && .status.bennettburst && .status.xianglingburst: {
-      raiden burst;
-      while .raiden.mods.raidenburst {
-        raiden attack: 3,
-        charge;
-      }
-      if .raiden.skill.ready {
-        raiden skill;
-      }
-    }
-    case .yelan.burst.cd < 300 && .xiangling.burst.cd < 150 && .bennett.burst.ready && .raiden.burst.cd < 350 && .raiden.energy > 80 && .yelan.energy > 65 && .xiangling.energy == 80: {
-      bennett burst;
-      if .bennett.skill.ready {
-        bennett skill;
-      }
-    }
-    case .status.bennettburst && .yelan.burst.cd < 150 && .xiangling.burst.ready && .raiden.burst.cd < 300 && .raiden.energy > 85 && .yelan.energy == 70: {
-      xiangling burst;
-      if .xiangling.skill.ready {
-        xiangling skill;
-      }
-    }
-    case .status.bennettburst && .status.xianglingburst && .yelan.burst.ready && .raiden.burst.cd < 150 && .raiden.energy == 90: {
-      yelan burst,
-      attack;
-      if .yelan.skill.ready {
-        yelan skill,attack;
-      }
-      if .yelan.skill.ready {
-        yelan skill,attack;
-      }
-    }
-    case .raiden.energy < 90 || .yelan.energy < 70 || .xiangling.energy < 80 || .bennett.energy < 60 && .bennett.skill.ready: {
-      bennett skill;
-    }
-    case .raiden.energy < 90 || .yelan.energy < 70 || .xiangling.energy < 80 || .bennett.energy < 60 && .yelan.skill.ready: {
-      yelan skill;
-    }
-    default: {
-      raiden attack;
-    }
-  }
+switch {
+case .raiden.burst.ready && .yelan.mods.yelanburst && .status.bennettburst && .status.xianglingburst: {
+raiden burst;
+while .raiden.mods.raidenburst {
+raiden attack: 3,
+charge;
+}
+if .raiden.skill.ready {
+raiden skill;
+}
+}
+case .yelan.burst.cd < 300 && .xiangling.burst.cd < 150 && .bennett.burst.ready && .raiden.burst.cd < 350 && .raiden.energy > 80 && .yelan.energy > 65 && .xiangling.energy == 80: {
+bennett burst;
+if .bennett.skill.ready {
+bennett skill;
+}
+}
+case .status.bennettburst && .yelan.burst.cd < 150 && .xiangling.burst.ready && .raiden.burst.cd < 300 && .raiden.energy > 85 && .yelan.energy == 70: {
+xiangling burst;
+if .xiangling.skill.ready {
+xiangling skill;
+}
+}
+case .status.bennettburst && .status.xianglingburst && .yelan.burst.ready && .raiden.burst.cd < 150 && .raiden.energy == 90: {
+yelan burst,
+attack;
+if .yelan.skill.ready {
+yelan skill,attack;
+}
+if .yelan.skill.ready {
+yelan skill,attack;
+}
+}
+case .raiden.energy < 90 || .yelan.energy < 70 || .xiangling.energy < 80 || .bennett.energy < 60 && .bennett.skill.ready: {
+bennett skill;
+}
+case .raiden.energy < 90 || .yelan.energy < 70 || .xiangling.energy < 80 || .bennett.energy < 60 && .yelan.skill.ready: {
+yelan skill;
+}
+default: {
+raiden attack;
+}
+}
 }
