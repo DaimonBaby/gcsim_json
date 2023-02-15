@@ -51,12 +51,4 @@ while 1 {
       raiden attack;
     }
   }
-  print ("raiden.burst.cd: ", .raiden.burst.cd);
-  print ("raiden.energy: ", .raiden.energy);
-  print ("yelan.burst.cd: ", .yelan.burst.cd);
-  print ("yelan.energy: ", .yelan.energy);
-  print ("xiangling.burst.cd: ", .xiangling.burst.cd);
-  print ("xiangling.energy: ", .xiangling.energy);
-  print ("bennett.burst.cd: ", .bennett.burst.cd);
-  print ("bennett.energy: ", .bennett.energy);
 }
