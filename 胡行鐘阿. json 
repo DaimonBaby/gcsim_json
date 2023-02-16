@@ -1,0 +1,69 @@
+options iteration = 1000 duration = 90 swap_delay = 12;
+
+target lvl = 100 resist = 0.1 particle_threshold = 460000 particle_drop_count = 3;
+
+let i = 0;
+
+active hutao;
+
+while 1 {
+  switch {
+    case !.albedo.elevator: {
+      albedo skill;
+    }
+    case !.zhongli.tags.shielded: {
+        zhongli skill[hold = 1];
+      }
+    case .xingqiu.burst.ready && .hutao.skill.cd < 200: {
+        xingqiu burst;
+        while .xingqiu.skill.ready {
+          xingqiu skill,
+          attack: 2;
+        }
+      }
+    case .albedo.burst.ready && .xingqiu.mods.xingqiuburst && .hutao.skill.ready: {
+        albedo burst;
+      }
+    case .hutao.skill.ready && .xingqiu.mods.xingqiuburst > 500: {
+        hutao skill;
+        i = 0;
+        while .hutao.mods.paramita {
+          if .hutao.mods.paramita < 100 && .hutao.burst.ready {
+            hutao burst;
+          } else {
+            hutao attack;
+            if .stam > 50 {
+              hutao charge;
+              if i == 2 {
+                hutao jump;
+                i = 0;
+              } else {
+                hutao dash;
+                i = i + 1;
+              }
+            }
+          }
+        }
+      }
+    case .xingqiu.energy < 80 && .xingqiu.skill.ready: {
+        xingqiu skill,
+        attack: 2;
+      }
+    default: {
+        switch {
+        case .hutao.onfield: {
+            hutao attack;
+          }
+        case .albedo.onfield: {
+            albedo attack;
+          }
+        case .xingqiu.onfield: {
+            xingqiu attack;
+          }
+        case .zhongli.onfield: {
+            zhongli attack;
+          }
+        }
+      }
+  }
+}

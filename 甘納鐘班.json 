@@ -1,0 +1,38 @@
+options iteration = 1000 duration = 90 swap_delay = 12;
+
+target lvl = 100 resist = 0.1 particle_threshold = 460000 particle_drop_count = 3;
+
+active ganyu;
+
+while 1 {
+  switch {
+    case !.zhongli.tags.shielded: {
+      zhongli skill[hold = 1];
+    }
+    case .bennett.burst.ready: {
+        bennett burst;
+        if .bennett.skill.ready {
+          bennett skill;
+        }
+      }
+    case !.debuff.res.t0.nahida-e: {
+        nahida skill;
+      }
+    case .nahida.burst.ready && .status.nahida-q < 180: {
+        nahida burst;
+        if .nahida.skill.ready {
+          nahida skill;
+        }
+      }
+    case .element.t0.pyro: {
+        ganyu aim;
+      }
+    default: {
+        if .bennett.skill.ready {
+          bennett skill;
+        } else {
+          ganyu aim;
+        }
+      }
+  }
+}

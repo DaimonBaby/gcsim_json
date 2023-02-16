@@ -1,0 +1,62 @@
+options iteration = 1000 duration = 90 swap_delay = 12;
+
+target lvl = 100 resist = 0.1 particle_threshold = 460000 particle_drop_count = 3;
+
+active ayaka;
+
+ayaka dash, attack, skill, attack, charge;
+
+while 1 {
+  switch {
+    case .kazuha.skill.ready && .element.t0.cryo && .kazuha.mods.kazuha-a4-cryo < 200: {
+      kazuha skill,
+      high_plunge;
+      if .kazuha.burst.ready {
+        kazuha burst;
+      }
+    }
+    case .shenhe.burst.ready && .ayaka.burst.ready: {
+        shenhe burst;
+      }
+    case .shenhe.skill.ready: {
+        shenhe skill;
+      }
+    case .kokomi.skill.ready: {
+        kokomi skill;
+      }
+    case .kokomi.burst.ready && .status.kokomiskill < 200: {
+        kokomi burst;
+      }
+    case .ayaka.skill.ready && .ayaka.onfield: {
+        ayaka dash,
+        attack,
+        skill,
+        attack,
+        charge;
+      }
+    case .ayaka.burst.ready && .shenhe.mods.shenheburst && .shenhe.mods.shenhe-quill: {
+        ayaka dash,
+        attack;
+        if .ayaka.skill.ready {
+          ayaka skill;
+        }
+        ayaka burst,
+        attack,
+        charge;
+      }
+
+    default: {
+        ayaka dash,
+        attack,
+        charge;
+        if .ayaka.skill.ready {
+          ayaka skill;
+        }
+      }
+  }
+  print ("shenheburst: ",.shenhe.mods.shenheburst);
+  print ("shenhe-quill: ",.shenhe.mods.shenhe-quill);
+  print ("kazuha-a4-cryo: ",.kazuha.mods.kazuha-a4-cryo);
+  print ("cryo",.element.t0.cryo);
+  print ("kokomi skill: ",.status.kokomiskill);
+}
