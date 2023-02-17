@@ -10,55 +10,57 @@ while 1 {
       zhongli skill[hold = 1];
     }
     case .xingqiu.burst.ready && .yelan.burst.ready && .hutao.skill.cd < 500: {
-      xingqiu burst;
-      while .xingqiu.skill.ready {
+        xingqiu burst;
+        while .xingqiu.skill.ready {
+          xingqiu skill;
+        }
+        yelan burst,
+        attack;
+        while .yelan.skill.ready {
+          yelan skill,
+          attack;
+        }
+      }
+    case .hutao.skill.ready && .xingqiu.mods.xingqiuburst > 500 && .yelan.mods.yelanburst > 500: {
+        hutao skill;
+        while .hutao.mods.paramita > 0 {
+          if .hutao.mods.paramita < 100 && .hutao.burst.ready {
+            hutao burst;
+          } else {
+            hutao attack,
+            attack;
+            if .stam > 50 {
+              hutao charge,
+              dash;
+            }
+          }
+        }
+        print("yelan burst: ",.yelan.mods.yelanburst);
+      }
+    case .xingqiu.energy < 75 && .yelan.energy < 65 && .xingqiu.skill.ready: {
         xingqiu skill;
       }
-      yelan burst,
-      attack;
-      while .yelan.skill.ready {
+    case .xingqiu.energy < 80 && .yelan.energy < 70 && .yelan.skill.ready: {
         yelan skill,
         attack;
       }
-    }
-    case .hutao.skill.ready && .xingqiu.mods.xingqiuburst > 500 && .yelan.mods.yelanburst > 500: {
-      hutao skill;
-      while .hutao.mods.paramita > 0 {
-        if .hutao.mods.paramita < 100 && .hutao.burst.ready {
-          hutao burst;
-        } else {
-          hutao attack,attack;
-          if .stam > 50 {
-            hutao charge,dash;
+    default: {
+        switch {
+        case .hutao.onfield: {
+            hutao attack;
+          }
+        case .yelan.onfield: {
+            yelan attack;
+          }
+        case .xingqiu.onfield: {
+            xingqiu attack;
+          }
+        case .zhongli.onfield: {
+            zhongli attack;
           }
         }
       }
-      print("yelan burst: ",.yelan.mods.yelanburst);
-    }
-    case .xingqiu.energy < 75 && .yelan.energy < 65 && .xingqiu.skill.ready: {
-      xingqiu skill;
-    }
-    case .xingqiu.energy < 80 && .yelan.energy < 70 && .yelan.skill.ready: {
-      yelan skill,
-      attack;
-    }
-    default: {
-      switch {
-        case .hutao.onfield: {
-          hutao attack;
-        }
-        case .yelan.onfield: {
-          yelan attack;
-        }
-        case .xingqiu.onfield: {
-          xingqiu attack;
-        }
-        case .zhongli.onfield: {
-          zhongli attack;
-        }
-      }
-    }
   }
-print("xingqiu burst: ",.xingqiu.mods.xingqiuburst);
-print ("xingqiu burst: ",.xingqiu.mods.xingqiuburst);
+  print("xingqiu burst: ",.xingqiu.mods.xingqiuburst);
+  print ("xingqiu burst: ",.xingqiu.mods.xingqiuburst);
 }
