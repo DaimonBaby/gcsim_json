@@ -53,6 +53,9 @@ while 1 {
         case .zhongli.onfield: {
             zhongli attack;
           }
+          case .mona.onfield:{
+           mona attack; 
+          }
         }
       }
   }
