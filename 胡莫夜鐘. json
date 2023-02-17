@@ -10,53 +10,55 @@ while 1 {
       zhongli skill[hold = 1];
     }
     case .yelan.burst.ready && .hutao.skill.cd < 500: {
-      yelan burst,
-      attack;
-      while .yelan.skill.ready {
-        yelan skill,attack;
-      }
-      if .mona.burst.ready {
-        mona burst;
-      }
-      if .mona.skill.ready {
-        mona skill;
-      }
-    }
-    case .hutao.skill.ready && .yelan.mods.yelanburst > 500: {
-      hutao skill;
-      while .hutao.mods.paramita > 0 {
-        #//if (.hutao.mods.paramita < 100 || .mona.mods.nob-4pc || .debuff.res.t0.mona-bubble) && .hutao.burst.ready {
-        if .hutao.mods.paramita < 100 && .hutao.burst.ready {
-          hutao burst;
-        } else {
-          hutao attack,
+        yelan burst,
+        attack;
+        while .yelan.skill.ready {
+          yelan skill,
           attack;
-          if .stam > 50 {
-            hutao charge,
-            dash;
+        }
+        if .mona.burst.ready {
+          mona burst;
+        }
+        if .mona.skill.ready {
+          mona skill;
+        }
+      }
+    case .hutao.skill.ready && .yelan.mods.yelanburst > 500: {
+        hutao skill;
+        while .hutao.mods.paramita {
+          #//if (.hutao.mods.paramita < 100 || .mona.mods.nob-4pc || .debuff.res.t0.mona-bubble) && .hutao.burst.ready {
+          if .hutao.mods.paramita < 100 && .hutao.burst.ready {
+            hutao burst;
+          } else {
+            hutao attack,
+            attack;
+            if .stam > 50 {
+              hutao charge,
+              dash;
+            }
           }
         }
       }
-    }
     case .yelan.energy < 70 && .yelan.skill.ready: {
-      yelan skill, attack;
-    }
+        yelan skill,
+        attack;
+      }
     default: {
-      switch {
+        switch {
         case .hutao.onfield: {
-          hutao attack;
-        }
+            hutao attack;
+          }
         case .yelan.onfield: {
-          yelan attack;
-        }
+            yelan attack;
+          }
         case .zhongli.onfield: {
-          zhongli attack;
-        }
+            zhongli attack;
+          }
         case .mona.onfield: {
-          mona attack;
+            mona attack;
+          }
         }
       }
-    }
   }
   print("yelan burst: ",.yelan.mods.yelanburst);
   print (.mona.mods.nob-4pc);
