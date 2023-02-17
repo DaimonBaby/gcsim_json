@@ -27,23 +27,12 @@ while 1 {
       hutao skill;
       i = 0;
       while .hutao.mods.paramita > 0 {
-        print ("stam: ",.stam);
-        print ("hutao skill: ",.hutao.mods.paramita);
-        print ("i:", i);
         if .hutao.mods.paramita < 100 && .hutao.burst.ready {
-          hutao attack,
-          burst;
+          hutao burst;
         } else {
-          hutao attack;
+          hutao attack,attack;
           if .stam > 50 {
-            hutao charge;
-            if i == 2 {
-              hutao jump;
-              i = 0;
-            } else {
-              hutao dash;
-              i = i + 1;
-            }
+            hutao charge,dash;
           }
         }
       }
