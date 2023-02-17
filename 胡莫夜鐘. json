@@ -16,6 +16,12 @@ while 1 {
           yelan skill,
           attack;
         }
+        if .mona.burst.ready {
+          mona burst;
+        }
+        if .mona.skill.ready {
+          mona skill;
+        }
       }
     case .hutao.skill.ready && .yelan.mods.yelanburst > 500: {
         hutao skill;
