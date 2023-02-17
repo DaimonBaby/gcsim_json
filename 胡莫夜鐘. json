@@ -1,1 +1,4 @@
-Temp 
+options iteration = 1000 duration = 90 swap_delay = 12;
+
+target lvl = 100 resist = 0.1 particle_threshold = 460000 particle_drop_count = 3;
+
